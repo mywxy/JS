@@ -1,0 +1,6 @@
+.footer__column-link {
+    color: white;
+    column-gap: 10px;
+    display: flex;
+    text-decoration: none;
+}

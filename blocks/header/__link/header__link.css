@@ -1,0 +1,8 @@
+.header__link {
+    line-height: 25px;
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: none;
+    z-index: 2;
+    color: #007bff;
+}

@@ -1,0 +1,10 @@
+.feynman {
+    min-height: 890px;
+    padding-top: 100px;
+    background-image: url("../../images_sprint-2/feynman.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 867px 637px;
+    position: relative;
+    background-color: #f2f2f2;
+}
