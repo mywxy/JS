@@ -1,0 +1,7 @@
+.cover__image {
+  opacity: 0.7;
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 10;
+  transition: opacity 0.3s;
+}

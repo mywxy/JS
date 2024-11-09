@@ -1,0 +1,53 @@
+@import "../vendor/normalize.css";
+@import "../vendor/fonts.css";
+
+@import "../blocks/root/root.css";
+
+@import "../blocks/container/container.css";
+@import "../blocks/container/_size/container_size_s.css";
+@import "../blocks/container/_size/container_size_l.css";
+
+@import "../blocks/header/header.css";
+@import "../blocks/header/__container/header__container.css";
+@import "../blocks/header/__language/header__language.css";
+@import "../blocks/header/__language/_active/header__language_active.css";
+@import "../blocks/header/__languages/header__languages.css";
+@import "../blocks/header/__logo/header__logo.css";
+
+@import "../blocks/welcome/welcome.css";
+@import "../blocks/welcome/__container/welcome__container.css";
+@import "../blocks/welcome/__image/welcome__image.css";
+@import "../blocks/welcome/__image-text/welcome__image-text.css";
+@import "../blocks/welcome/__subtitle/welcome__subtitle.css";
+@import "../blocks/welcome/__title/welcome__title.css";
+
+@import "../blocks/statistics/__title/statistics__title.css";
+@import "../blocks/statistics/__text/statistics__text.css";
+@import "../blocks/statistics/__list/statistics__list.css";
+@import "../blocks/statistics/__list-text/statistics__list-text.css";
+@import "../blocks/statistics/__list-text-span/statistics__list-text-span.css";
+
+@import "../blocks/gallery/gallery.css";
+@import "../blocks/gallery/__grid/gallery__grid.css";
+
+@import "../blocks/landmark/landmark.css";
+@import "../blocks/landmark/__image/landmark__image.css";
+@import "../blocks/landmark/__link/landmark__link.css";
+@import "../blocks/landmark/__paragraph/landmark__paragraph.css";
+@import "../blocks/landmark/__title/landmark__title.css";
+@import "../blocks/landmark/__url/landmark__url.css";
+@import "../blocks/landmark/__url-text/landmark__url-text.css";
+
+@import "../blocks/cover/cover.css";
+@import "../blocks/cover/__container/cover__container.css";
+@import "../blocks/cover/__image/cover__image.css";
+@import "../blocks/cover/__main/cover__main.css";
+@import "../blocks/cover/__subtitle/cover__subtitle.css";
+@import "../blocks/cover/__title/cover__title.css";
+@import "../blocks/cover/__text/cover__text.css";
+
+@import "../blocks/footer/footer.css";
+@import "../blocks/footer/__container/footer__container.css";
+@import "../blocks/footer/__copyright/footer__copyright.css";
+@import "../blocks/footer/__link/footer__link.css";
+@import "../blocks/footer/__links/footer__links.css";

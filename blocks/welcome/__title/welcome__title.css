@@ -1,0 +1,15 @@
+.welcome__title {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: 96px;
+  line-height: 100px;
+  font-weight: 900;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .welcome__title {
+    font-size: 40px;
+    line-height: 44px;
+  }
+}
