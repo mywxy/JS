@@ -10,6 +10,7 @@ import {handleImagePopupOpen} from "./imagePopup";
 
 const profileImage = document.querySelector('.profile__image');
 profileImage.style.backgroundImage = `url(${avatarUrl})`;
+
 const cards = initialCards.map(createCard);
 const places = document.querySelector(".places__list");
 places.append(...cards);

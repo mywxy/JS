@@ -31,6 +31,7 @@ function setInputsEventListeners(inputs, submitButton, validationSettings) {
       } else {
         showInputError(input, errorElement, e.target.validationMessage, validationSettings);
       }
+
       toggleButtonState(inputs, submitButton, validationSettings);
     })
   })
@@ -43,6 +44,7 @@ function enableValidation(validationSettings) {
     const inputs = form.querySelectorAll(validationSettings.inputSelector);
     const submitButton = form.querySelector(validationSettings.submitButtonSelector);
     toggleButtonState(inputs, submitButton, validationSettings);
+
     setInputsEventListeners(inputs, submitButton, validationSettings);
   })
 }

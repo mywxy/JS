@@ -33,12 +33,14 @@ function closePopup(popup) {
 function enablePopups(popupsSettings) {
   for (const { element, openers, openerHandler, submitHandler } of Object.values(popupsSettings)) {
     element.classList.add("popup_is-animated");
+
     openers.forEach((opener) => {
       opener.addEventListener("click", openerHandler(element, opener));
     })
 
     const closeButton = element.querySelector(".popup__close");
     closeButton.addEventListener("click", () => closePopup(element));
+
     if (submitHandler) {
       const form = element.querySelector(".popup__form");
       form.addEventListener("submit", submitHandler(element))
