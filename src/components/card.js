@@ -1,25 +1,46 @@
-function addCardHandlers(card) {
-  const likeButton = card.querySelector(".card__like-button");
-  likeButton.addEventListener("click", () => likeButton.classList.toggle("card__like-button_is-active"));
+import { closeModal, openImagePopup } from './modal.js';
 
-  const deleteButton = card.querySelector(".card__delete-button");
-  deleteButton.addEventListener("click", () => deleteButton.closest(".card").remove());
-}
-
-function createCard({name, link}) {
-  const template = document.querySelector("#card-template").content;
-
-  const card = template.cloneNode(true);
+export function createCard({ name, link }) {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const card = cardTemplate.cloneNode(true);
 
   const image = card.querySelector(".card__image");
+  const title = card.querySelector(".card__title");
+  const deleteButton = card.querySelector(".card__delete-button");
+  const likeButton = card.querySelector(".card__like-button");
+
   image.src = link;
   image.alt = name;
+  title.textContent = name;
 
-  card.querySelector(".card__title").textContent = name;
+  image.addEventListener("click", () => {
+    openImagePopup(link, name);
+  });
 
-  addCardHandlers(card);
+  likeButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    likeButton.classList.toggle("card__like-button_is-active");
+  });
+
+  deleteButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const cardToRemove = deleteButton.closest(".card");
+    if (cardToRemove) {
+      cardToRemove.remove();
+    }
+  });
 
   return card;
 }
 
-export { createCard };
+export function handleCardSubmit(e) {
+  e.preventDefault();
+
+  const cardNameInput = document.querySelector('.popup__input_type_card-name');
+  const cardLinkInput = document.querySelector('.popup__input_type_url');
+  
+  const newCard = createCard({ name: cardNameInput.value, link: cardLinkInput.value });
+  document.querySelector(".places__list").prepend(newCard);
+  
+  closeModal(document.querySelector(".popup_type_new-card"));
+}

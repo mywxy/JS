@@ -1,49 +1,31 @@
-import { initialCards } from "./cards";
 import "../pages/index.css";
 import avatarUrl from '../images/avatar.jpg';
-import {enableValidation} from "./validate";
-import {enablePopups} from "./modal";
-import {createCard} from "./card";
-import {handleCardPopupOpen, handleCardPopupSubmit} from "./cardPopup";
-import {handleProfilePopupOpen, handleProfilePopupSubmit} from "./profilePopup";
-import {handleImagePopupOpen} from "./imagePopup";
+import { enableValidation } from './validate.js';
+import { openModal, closeModal } from './modal.js';
+import { handleCardSubmit, createCard } from './card.js';
+import { handleProfileSubmit } from './profile.js';
+import { initialCards } from './cards.js';
 
 const profileImage = document.querySelector('.profile__image');
 profileImage.style.backgroundImage = `url(${avatarUrl})`;
 
-const cards = initialCards.map(createCard);
+const profilePopup = document.querySelector(".popup_type_edit");
+const cardPopup = document.querySelector(".popup_type_new-card");
+
+const openEditProfileButton = document.querySelector(".profile__edit-button");
+const addCardButton = document.querySelector(".profile__add-button");
+
+openEditProfileButton.addEventListener("click", () => openModal(profilePopup));
+addCardButton.addEventListener("click", () => openModal(cardPopup));
+
 const places = document.querySelector(".places__list");
+const cards = initialCards.map(createCard);
 places.append(...cards);
 
-const popups = {
-  profilePopup: {
-    element: document.querySelector(".popup_type_edit"),
-    openers: [document.querySelector(".profile__edit-button")],
-    openerHandler: handleProfilePopupOpen,
-    submitHandler: handleProfilePopupSubmit
-  },
-  cardPopup: {
-    element: document.querySelector(".popup_type_new-card"),
-    openers: [document.querySelector(".profile__add-button")],
-    openerHandler: handleCardPopupOpen,
-    submitHandler: handleCardPopupSubmit
-  },
-  imagePopup: {
-    element: document.querySelector(".popup_type_image"),
-    openers: Array.from(document.querySelectorAll(".card__image")),
-    openerHandler: handleImagePopupOpen
-  }
-}
+const profileForm = profilePopup.querySelector('.popup__form[name="edit-profile"]');
+profileForm.addEventListener("submit", handleProfileSubmit);
 
-enablePopups(popups);
+const newPlaceForm = cardPopup.querySelector('.popup__form[name="new-place"]');
+newPlaceForm.addEventListener("submit", handleCardSubmit);
 
-const validationSettings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
-
-enableValidation(validationSettings);
+enableValidation();

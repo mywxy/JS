@@ -1,52 +1,39 @@
-function showInputError(input, errorElement, errorText, validationSettings) {
-  errorElement.textContent = errorText;
-  errorElement.classList.add(validationSettings.errorClass);
-  input.classList.add(validationSettings.inputErrorClass)
-}
+export function validateInput(input) {
+  const errorMessage = input.nextElementSibling;
 
-function hideInputError(input, errorElement, validationSettings) {
-  errorElement.textContent = "";
-  errorElement.classList.remove(validationSettings.errorClass);
-  input.classList.remove(validationSettings.inputErrorClass)
-}
-
-function toggleButtonState(inputs, button, validationSettings) {
-  const hasInvalidInput = Array.from(inputs).some(input => !input.validity.valid);
-
-  if (hasInvalidInput) {
-    button.classList.add(validationSettings.inactiveButtonClass);
-    button.setAttribute("disabled", "true");
+  if (!input.validity.valid) {
+    if (input.validity.valueMissing) {
+      errorMessage.textContent = 'Это поле обязательно для заполнения.';
+    } else if (input.validity.tooShort) {
+      errorMessage.textContent = `Минимум ${input.minLength} символов.`;
+    } else if (input.type === 'url' && input.validity.typeMismatch) {
+      errorMessage.textContent = 'Введите корректный URL.';
+    } else {
+      errorMessage.textContent = 'Некорректное значение.';
+    }
   } else {
-    button.classList.remove(validationSettings.inactiveButtonClass);
-    button.removeAttribute("disabled");
+    errorMessage.textContent = '';
   }
 }
 
-function setInputsEventListeners(inputs, submitButton, validationSettings) {
-  inputs.forEach(input => {
-    const errorElement = document.querySelector(`.${input.id}-error`)
-    input.addEventListener("input", (e) => {
-      if (e.target.validity.valid) {
-        hideInputError(input, errorElement, validationSettings);
-      } else {
-        showInputError(input, errorElement, e.target.validationMessage, validationSettings);
-      }
-
-      toggleButtonState(inputs, submitButton, validationSettings);
-    })
-  })
+export function toggleSaveButton(form) {
+  const inputs = form.querySelectorAll('input');
+  const saveButton = form.querySelector('.popup__button[type="submit"]');
+  const allValid = [...inputs].every(input => input.validity.valid);
+  saveButton.disabled = !allValid;
+  saveButton.classList.toggle('popup__button_disabled', !allValid);
 }
 
-function enableValidation(validationSettings) {
-  const forms = document.querySelectorAll(validationSettings.formSelector);
-
+export function enableValidation() {
+  const forms = document.querySelectorAll('.popup__form');
   forms.forEach(form => {
-    const inputs = form.querySelectorAll(validationSettings.inputSelector);
-    const submitButton = form.querySelector(validationSettings.submitButtonSelector);
-    toggleButtonState(inputs, submitButton, validationSettings);
-
-    setInputsEventListeners(inputs, submitButton, validationSettings);
-  })
+    const inputs = form.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+        validateInput(input);
+        toggleSaveButton(form);
+      });
+    });
+    toggleSaveButton(form);
+  });
 }
-
-export { enableValidation };
