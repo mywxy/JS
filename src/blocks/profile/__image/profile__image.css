@@ -7,7 +7,14 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  transition: background-color 0.3s, filter 0.3s;
+  margin: auto;
 }
+
+.profile__image:hover {
+  filter: brightness(20%);
+}
+
 
 @media screen and (max-width: 740px) {
   .profile__image {
